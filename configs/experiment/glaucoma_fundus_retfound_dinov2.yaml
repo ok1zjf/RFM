@@ -1,0 +1,44 @@
+defaults:
+  - _defaults
+  - _self_
+
+experiment_name: glaucoma_fundus_retfound_dinov2
+
+model:
+  img_size: 224          # must match pretrained weights
+  pretrained_weights: weights/RETFound_dinov2_meh.pth
+  name: retfound-dinov2
+
+trainer:
+  # Optimizer/schedule matches RETFound's own official linear-probe recipe
+  # (main_finetune.py / util/lr_sched.py): AdamW, linear warmup then
+  # half-cycle cosine decay, lr scaled from a reference "blr" by batch
+  # size/256. layer_decay is omitted: irrelevant with a fully frozen
+  # backbone (a single trainable head param group, nothing to decay).
+  max_epochs: 50
+  select_best: auroc      # validation metric picking which epoch's weights get tested (auroc,
+                          # auroc+f1, balanced_acc, f1, acc, loss)
+                          # null tests the final epoch's weights instead
+  blr: 5.0e-03            # lr = blr * batch_size / 256
+  warmup_epochs: 10
+  min_lr: 1.0e-06
+  weight_decay: 0.05
+  batch_size: 24
+  num_workers: 16
+  eval_batch_size: 256
+  eval_num_workers: 10
+  resize_before_crop: 512
+  eval_crop_pct: 0.875    # RETFound eval transform: resize to img_size/eval_crop_pct then
+                           # center-crop to img_size (util/datasets.py:build_transform)
+
+data:
+  plot_auroc_ci_band: true  # shaded 95% bootstrap band on the ROC curve
+  plot_auprc_ci_band: true  # shaded 95% bootstrap band on the PR curve
+  images_root: datasets/gfid/
+  csv_path: datasets/gfid_splits.csv
+  phenotype: glaucoma_grade
+  num_classes: 3
+  class_names: ["No glaucoma", "Early glaucoma", "Advanced glaucoma"]
+  train_split: t
+  val_split: v
+  test_split: e

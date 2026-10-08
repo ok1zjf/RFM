@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 150" width="900" height="150">
+  <g transform="translate(15,15) scale(0.6)">
+    <circle cx="100" cy="100" r="90" fill="#8a97a8" stroke="#1a1a1a" stroke-width="6"/>
+    <g fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round">
+      <path d="M100,100 C80,85 55,75 30,68"/>
+      <path d="M100,100 C85,80 78,55 72,28"/>
+      <path d="M100,100 C120,82 148,76 172,70"/>
+      <path d="M100,100 C118,120 145,128 170,132"/>
+      <path d="M100,100 C82,118 60,132 34,140"/>
+      <path d="M100,100 C90,122 88,150 92,174"/>
+    </g>
+    <ellipse cx="100" cy="100" rx="20" ry="15" fill="#3d4a5c" stroke="#1a1a1a" stroke-width="3"/>
+    <g fill="#f2b632" stroke="#1a1a1a" stroke-width="1.5">
+      <circle cx="30" cy="68" r="6"/>
+      <circle cx="72" cy="28" r="6"/>
+      <circle cx="172" cy="70" r="6"/>
+      <circle cx="170" cy="132" r="6"/>
+      <circle cx="34" cy="140" r="6"/>
+      <circle cx="92" cy="174" r="6"/>
+    </g>
+  </g>
+  <text x="170" y="76" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="700" fill="#1a1a1a">RFM: A Lightweight Retinal Foundation</text>
+  <text x="170" y="108" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="700" fill="#1a1a1a">Model for Generalised Oculomics</text>
+</svg>

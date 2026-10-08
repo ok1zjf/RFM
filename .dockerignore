@@ -1,0 +1,47 @@
+# Allowlist: ignore everything, then re-include only what the image needs.
+# Anything not listed here (dev scripts, notes, local data, weights, outputs)
+# stays out of the build context and the image.
+*
+
+# Code
+!compile_results.py
+!convert_aptos.py
+!convert_gfid.py
+!convert_idrid.py
+!convert_messidor2.py
+!convert_papila.py
+!dataset.py
+!dataset_prep_common.py
+!metrics.py
+!model.py
+!predict.py
+!test_only.py
+!train.py
+!turbo_pillow.py
+
+!init.sh
+!download_weights.sh
+!download_datasets.sh
+!prepare_datasets.sh
+!train_test.sh
+!test.sh
+
+!requirements.txt
+!configs/
+
+# Data shipped with the code: the split/label CSVs (convert_<dataset>.py reads
+# them as its label reference), and the released heads and their configs
+!datasets/*.csv
+!released/results_manifest.txt
+!released/*/config.yaml
+!released/*/checkpoints/best.pt
+
+# Licenses and docs
+!LICENSE
+!LICENSE-DINOv3.md
+!README.md
+!RETFOUND_REPLICATION.md
+
+# Exclusions inside allowed paths (the last matching line wins)
+**/__pycache__/
+**/*.pyc

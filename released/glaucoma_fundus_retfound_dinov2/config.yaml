@@ -1,0 +1,34 @@
+experiment_name: glaucoma_fundus_retfound_dinov2
+results_manifest: outputs/results_manifest.txt
+model:
+  img_size: 224
+  pretrained_weights: weights/RETFound_dinov2_meh.pth
+  name: retfound-dinov2
+trainer:
+  max_epochs: 50
+  select_best: auroc
+  blr: 0.005
+  warmup_epochs: 10
+  min_lr: 1.0e-06
+  weight_decay: 0.05
+  batch_size: 24
+  num_workers: 16
+  eval_batch_size: 256
+  eval_num_workers: 10
+  resize_before_crop: 512
+  eval_crop_pct: 0.875
+data:
+  plot_auroc_ci_band: true
+  plot_auprc_ci_band: true
+  images_root: datasets/gfid/
+  csv_path: datasets/gfid_splits.csv
+  phenotype: glaucoma_grade
+  num_classes: 3
+  class_names:
+  - No glaucoma
+  - Early glaucoma
+  - Advanced glaucoma
+  train_split: t
+  val_split: v
+  test_split: e
+seed: 42

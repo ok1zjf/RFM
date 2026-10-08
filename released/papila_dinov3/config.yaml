@@ -1,0 +1,31 @@
+experiment_name: papila_dinov3
+results_manifest: outputs/results_manifest.txt
+model:
+  img_size: 336
+  pretrained_weights: weights/vit_base_patch16_dinov3.lvd1689m
+  name: dinov3-global-pool
+trainer:
+  max_epochs: 200
+  select_best: auroc
+  base_lr: 0.001
+  weight_decay: 5.0e-05
+  batch_size: 64
+  num_workers: 16
+  eval_batch_size: 256
+  eval_num_workers: 10
+  resize_before_crop: null
+data:
+  plot_auroc_ci_band: true
+  plot_auprc_ci_band: true
+  images_root: datasets/papila/
+  csv_path: datasets/papila_splits.csv
+  phenotype: glaucoma_grade
+  num_classes: 3
+  class_names:
+  - Healthy
+  - Glaucoma
+  - Suspicious
+  train_split: t
+  val_split: v
+  test_split: e
+seed: 42

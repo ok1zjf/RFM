@@ -1,0 +1,7 @@
+hydra:
+  run:
+    dir: outputs/${experiment_name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  job:
+    chdir: true
+
+results_manifest: outputs/results_manifest.txt

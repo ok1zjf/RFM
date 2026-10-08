@@ -1,0 +1,43 @@
+__pycache__/
+*.pyc
+
+# libjpeg-turbo Pillow for the dataset converters, installed by turbo_pillow.py
+.prep_pillow/
+
+# Fetched by init.sh -> download_weights.sh / prepare_datasets.sh; the split
+# CSVs are the only dataset artifacts meant to be committed. Native runs use
+# datasets/ at the repo root; the Docker workflow uses RFM/datasets/ instead
+# (weights/ and outputs/ below already match at any depth, so RFM/weights/
+# and RFM/outputs/ need no separate rule - only datasets/*'s CSV exception
+# does, since a pattern containing a "/" is anchored to the repo root).
+datasets/*
+!datasets/*.csv
+RFM/datasets/*
+!RFM/datasets/*.csv
+weights/
+
+# Written by train_test.sh / test.sh (run dirs, logs/, results_manifest.txt,
+# results.pdf all land under here)
+outputs/
+
+# released/ ships each experiment's config.yaml + head-only checkpoints/best.pt
+# (plus results_manifest.txt); everything ./test.sh --manifest
+# released/results_manifest.txt writes next to them is regenerated output.
+released/*/*
+!released/*/config.yaml
+!released/*/checkpoints/
+released/*/checkpoints/*
+!released/*/checkpoints/best.pt
+released/logs/
+released/*.pdf
+released/results_*.txt
+!released/results_manifest.txt
+
+# Local smoke-test scripts for the README's native/Docker "Getting started"
+# instructions, and their scratch state - developer-only, not shipped.
+test_native_install.sh
+test_docker_install.sh
+verify_manifest.py
+.test_native_env/
+.test_native_venv/
+docker_data/
